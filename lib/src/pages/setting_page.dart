@@ -218,7 +218,7 @@ class _SettingPageState extends State<SettingPage> {
                     IconButton(
                       icon: Icon(Icons.open_in_browser_outlined),
                       onPressed: () async {
-                        const url = 'https://github.com/AlanOlarte';
+                        const url = 'https://github.com/AlanOlarte/MyListVerb_Flutter';
                         if (await canLaunch(url)) {
                           await launch(url);
                         } else {
