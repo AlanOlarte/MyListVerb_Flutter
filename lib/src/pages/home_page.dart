@@ -17,24 +17,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-        appBar: MyAppBar(),
-        body: SizedBox(
-          child: Stack(
-            children: <Widget>[
-              BarTypeVerb(),
-              Container(
-                  decoration: BoxDecoration(
-                      //color: Colors.black38,
-                      ),
-                  margin: EdgeInsets.only(top: 55.0),
-                  padding: EdgeInsets.all(5.0),
-                  alignment: Alignment.bottomCenter,
-                  child: ListItems(),
-              ),
-            ],
-          ),
-        ));
+    return Container(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+          appBar: MyAppBar(),
+          body: SizedBox(
+            child: Stack(
+              children: <Widget>[
+                BarTypeVerb(),
+                Container(
+                    margin: EdgeInsets.only(top: 55.0),
+                    padding: EdgeInsets.all(5.0),
+                    alignment: Alignment.bottomCenter,
+                    child: ListItems(),
+                ),
+              ],
+            ),
+          )),
+    );
   }
 
   @override

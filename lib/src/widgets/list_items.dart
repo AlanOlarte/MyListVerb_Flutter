@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:list_verbs/src/provider/order_provider.dart';
 import 'package:list_verbs/src/provider/search_provider.dart';
+import 'package:list_verbs/src/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:list_verbs/src/provider/list_provider.dart';
@@ -22,19 +23,20 @@ class ListItems extends StatelessWidget {
     final type = Provider.of<FilterTypeVerb>(context);
     final order = Provider.of<OrderProvider>(context);
     final search = Provider.of<SearchProvider>(context);
+    final theme = Provider.of<ThemeChanger>(context);
 
     return FutureBuilder(
       future: listProvider.cargarData(type.getTypeVerb(), order.orderVerb),
       initialData: [],
       builder: ( context, AsyncSnapshot<List<dynamic>> snapshot ){
         return ListView(
-          children: _listItems( snapshot.data, context, search),
+          children: _listItems( snapshot.data, context, search, theme.getThemeType()),
         );
       },
     );
   }
 
-  List<Widget> _listItems( List<dynamic> data, BuildContext context, SearchProvider search) {
+  List<Widget> _listItems( List<dynamic> data, BuildContext context, SearchProvider search, bool theme) {
     final List<Widget> options = [];
 
     speak(String text, int num) {
@@ -55,10 +57,9 @@ class ListItems extends StatelessWidget {
       list.forEach((opt) {
 
         final widgetTemp = Container(
-              //padding: EdgeInsets.symmetric(vertical: 20.0),
               margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 2.0),
+                color: Theme.of(context).accentColor,
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
               child: Row(

@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="My List Verb"
+        android:label="My Verb List"
         android:roundIcon="@mipmap/ic_listverb_round"
         android:icon="@mipmap/ic_listverb">
         <activity

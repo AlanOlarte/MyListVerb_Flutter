@@ -8,16 +8,15 @@ class TextSubWidget extends StatelessWidget {
   String _textPron;
   bool _show = false;
 
-  TextSubWidget ( this.textEnglish, [textPron = ""] ){
-    this._textPron=textPron;
+  TextSubWidget(this.textEnglish, [textPron = ""]) {
+    this._textPron = textPron;
   }
 
   @override
   Widget build(BuildContext context) {
-
     final showVerb = Provider.of<ShowSpanishVerb>(context);
 
-    if(_textPron.isNotEmpty) {
+    if (_textPron.isNotEmpty) {
       _show = showVerb.showVerb;
     }
 
@@ -25,13 +24,25 @@ class TextSubWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text( textEnglish,
-              style: Theme.of(context).textTheme.headline2
+          Text(
+            textEnglish,
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.height * 0.02,
+                fontFamily: "BalsamiqSans",
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w200,
+                ),
           ),
           Visibility(
             visible: _show,
-            child: Text(_textPron,
-                style: Theme.of(context).textTheme.headline3
+            child: Text(
+              textEnglish,
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.015,
+                  fontFamily: "BalsamiqSans",
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w200,
+                  ),
             ),
           ),
         ],
