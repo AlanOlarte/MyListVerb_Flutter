@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
+
 import 'package:list_verbs/src/provider/show_spanish_verb.dart';
+import 'package:list_verbs/src/provider/theme_provider.dart';
 
 // ignore: must_be_immutable
 class TextSubWidget extends StatelessWidget {
@@ -15,6 +18,7 @@ class TextSubWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final showVerb = Provider.of<ShowSpanishVerb>(context);
+    final theme = Provider.of<ThemeChanger>(context);
 
     if (_textPron.isNotEmpty) {
       _show = showVerb.showVerb;
@@ -36,9 +40,10 @@ class TextSubWidget extends StatelessWidget {
           Visibility(
             visible: _show,
             child: Text(
-              textEnglish,
+              _textPron,
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.height * 0.015,
+                  color: theme.getThemeType() ? Colors.grey[400] : Colors.grey[700],
                   fontFamily: "BalsamiqSans",
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w200,
