@@ -1,33 +1,34 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:list_verbs/src/provider/repeat_verb.dart';
+import 'package:provider/provider.dart';
 
 class TextToSpeech {
   FlutterTts flutterTts = FlutterTts();
 
-  bool _rate = true;
-  bool _firstTouch = true;
-  int _repeat;
+  Future<void> speak( String texto, BuildContext context) async {
+    final repeat = Provider.of<RepeatVerb>(context, listen: false);
 
-  Future<void> speak( String texto, int num) async {
     await flutterTts.setLanguage('en-US');
 
-    if (_repeat == num) {
-      _firstTouch = false;
-    }
-
-    if (_firstTouch || _rate) {
-      await flutterTts.setSpeechRate(0.8);
-      _repeat = num;
-      _rate = false;
+    if(repeat.column == repeat.previoCcolumn){
+      if(repeat.tap == 1) {
+        await flutterTts.setSpeechRate(0.2);
+        repeat.tap = 2;
+      } else {
+        await flutterTts.setSpeechRate(0.7);
+        repeat.tap = 1;
+      }
     } else {
-      await flutterTts.setSpeechRate(0.4);
-      _firstTouch = true;
-      _rate = true;
+      await flutterTts.setSpeechRate(0.7);
+      repeat.tap = 1;
     }
+    repeat.previoCcolumn = repeat.column;
+
     await flutterTts.speak(texto);
   }
 
   void stop() {
     flutterTts.stop();
-    print('Speak Detenida');
   }
 }

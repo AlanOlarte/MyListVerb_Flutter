@@ -29,13 +29,16 @@ class _SettingPageState extends State<SettingPage> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Configuracion',
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height * 0.028,
-              fontFamily: "BalsamiqSans",
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w700,
-            )),
+        title: FittedBox(
+          fit: BoxFit.contain,
+          child: Text('Configuración',
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.height * 0.028,
+                fontFamily: "BalsamiqSans",
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w700,
+              )),
+        ),
       ),
       body: Container(
         margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -170,7 +173,7 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   List<DropdownMenuItem<String>> getOpcionesDropdown(List<String> list) {
-    List<DropdownMenuItem<String>> lista = new List();
+    List<DropdownMenuItem<String>> lista = [];
     list.forEach((verbo) {
       lista.add(DropdownMenuItem(
         child: Text(
@@ -223,7 +226,7 @@ class _SettingPageState extends State<SettingPage> {
               items: getOpcionesDropdown(type.getList()),
               onChanged: (opt) {
                 type.setTypeVerb(type.getList().indexOf(opt));
-                type.setVerboSeleccionado(opt);
+                type.setVerboSeleccionado(opt.toString());
               },
             ),
           ),

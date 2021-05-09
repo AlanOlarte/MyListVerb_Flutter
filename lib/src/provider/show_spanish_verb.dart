@@ -20,7 +20,7 @@ class ShowSpanishVerb with ChangeNotifier {
     notifyListeners();
   }
 
-  get showVerb {
+  bool get showVerb {
     _getType();
     return _showVerb;
   }

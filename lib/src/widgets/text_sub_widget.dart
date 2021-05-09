@@ -5,10 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:list_verbs/src/provider/show_spanish_verb.dart';
 import 'package:list_verbs/src/provider/theme_provider.dart';
 
-// ignore: must_be_immutable
 class TextSubWidget extends StatelessWidget {
   String textEnglish;
-  String _textPron;
+  String _textPron = '';
   bool _show = false;
 
   TextSubWidget(this.textEnglish, [textPron = ""]) {
@@ -28,26 +27,32 @@ class TextSubWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            textEnglish,
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.02,
-                fontFamily: "BalsamiqSans",
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w200,
-                ),
-          ),
-          Visibility(
-            visible: _show,
+          FittedBox(
+            fit: BoxFit.contain,
             child: Text(
-              _textPron,
+              textEnglish,
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height * 0.015,
-                  color: theme.getThemeType() ? Colors.grey[400] : Colors.grey[700],
+                  fontSize: MediaQuery.of(context).size.height * 0.02,
                   fontFamily: "BalsamiqSans",
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w200,
                   ),
+            ),
+          ),
+          Visibility(
+            visible: _show,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                _textPron,
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height * 0.015,
+                    color: theme.getThemeType() ? Colors.grey[400] : Colors.grey[700],
+                    fontFamily: "BalsamiqSans",
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w200,
+                    ),
+              ),
             ),
           ),
         ],

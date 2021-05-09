@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+
 import 'package:list_verbs/src/provider/order_provider.dart';
+import 'package:list_verbs/src/provider/repeat_verb.dart';
 import 'package:list_verbs/src/provider/search_provider.dart';
 import 'package:list_verbs/src/provider/theme_provider.dart';
+import 'package:list_verbs/src/provider/filter_verb.dart';
+import 'package:list_verbs/src/provider/list_provider.dart';
+
 import 'package:provider/provider.dart';
 
-import 'package:list_verbs/src/provider/list_provider.dart';
-import 'package:list_verbs/src/provider/filter_verb.dart';
 
 import 'package:list_verbs/src/widgets/list_empty.dart';
 import 'package:list_verbs/src/widgets/text_sub_widget.dart';
 
 import '../utils/TextToSpeech.dart';
 
-// ignore: must_be_immutable
 class ListItems extends StatelessWidget {
 
   List<dynamic> list = [];
@@ -39,10 +41,6 @@ class ListItems extends StatelessWidget {
   List<Widget> _listItems( List<dynamic> data, BuildContext context, SearchProvider search, bool theme) {
     final List<Widget> options = [];
 
-    speak(String text, int num) {
-      TextToSpeech().speak(text, num);
-    }
-
     if (search.getSearch().isEmpty) {
       list = data;
     } else {
@@ -65,37 +63,11 @@ class ListItems extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
+                  _buttonVerb(opt["infinitive"],opt["pronInfinitive"], "${opt["id"]}"+"0", context),
+                  _buttonVerb(opt["past"],opt["pronPast"], "${opt["id"]}"+"1", context),
+                  _buttonVerb(opt["participle"],opt["pronParticiple"], "${opt["id"]}"+"2", context),
                   Expanded(
-                    child: InkWell(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 55.0,
-                        child: TextSubWidget(opt["infinitive"], opt["pronInfinitive"] )
-                      ),
-                      onTap: () => speak(opt["infinitive"], 0),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 55.0,
-                          child: TextSubWidget(opt["past"], opt["pronPast"] )
-                      ),
-                      onTap: () => speak(opt["past"], 1),
-                    ),
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 55.0,
-                          child: TextSubWidget(opt["participle"], opt["pronParticiple"] )
-                      ),
-                      onTap: () => speak(opt["participle"], 2),
-                    ),
-                  ),
-                  Expanded(
+                    flex: 1,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: 55.0,
@@ -115,5 +87,29 @@ class ListItems extends StatelessWidget {
     }
 
     return options;
+  }
+
+  Widget _buttonVerb(String text, String pronunciation, String column, BuildContext context) {
+    final tapColumn = Provider.of<RepeatVerb>(context, listen: false);
+
+    return Expanded(
+      flex: 1,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        child: Container(
+            padding: EdgeInsets.only(right: 2),
+            height: 55.0,
+            child: TextSubWidget(text, pronunciation )
+        ),
+        onTap: () {
+          tapColumn.column = int.parse(column);
+          _speak(text, context);
+        },
+      ),
+    );
+  }
+
+  _speak(String text, BuildContext context) {
+    TextToSpeech().speak(text, context);
   }
 }

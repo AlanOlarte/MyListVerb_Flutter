@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:list_verbs/src/pages/setting_page.dart';
 
 import 'package:list_verbs/src/provider/app_bar_provider.dart';
 import 'package:list_verbs/src/provider/search_provider.dart';
-import 'package:list_verbs/src/provider/theme_provider.dart';
 
 import 'package:provider/provider.dart';
 
@@ -47,14 +45,17 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 selectedAppBar.selectedAppBarOpt = 1;
               },
             ),
-            Text(
-              'Mi Lista de Verbos',
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.028,
-                fontFamily: "BalsamiqSans",
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w700,
-                color: Colors.white
+            FittedBox(
+              fit: BoxFit.contain,
+              child: Text(
+                'Mi Lista de Verbos',
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.028,
+                  fontFamily: "BalsamiqSans",
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white
+                ),
               ),
             ),
             IconButton(

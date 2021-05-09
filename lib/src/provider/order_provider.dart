@@ -19,7 +19,7 @@ class OrderProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  get orderVerb {
+  bool get orderVerb {
     _getOrder();
     return _orderVerb;
   }

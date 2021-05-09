@@ -8,6 +8,7 @@ import 'package:list_verbs/src/provider/filter_verb.dart';
 import 'package:list_verbs/src/provider/app_bar_provider.dart';
 import 'package:list_verbs/src/provider/search_provider.dart';
 import 'package:list_verbs/src/provider/order_provider.dart';
+import 'package:list_verbs/src/provider/repeat_verb.dart';
 
 import 'package:list_verbs/src/pages/home_page.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider( create: (_) => SelectedAppBar()  ),
         ChangeNotifierProvider( create: (_) => SearchProvider()  ),
         ChangeNotifierProvider( create: (_) => OrderProvider()  ),
+        ChangeNotifierProvider( create: (_) => RepeatVerb()  ),
       ],
       child: MaterialAppWithTheme(),
     );
