@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:list_verbs/src/utils/user_preferences.dart';
 
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,11 @@ import 'package:list_verbs/src/provider/repeat_verb.dart';
 
 import 'package:list_verbs/src/pages/home_page.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  final prefs = new UserPreferences();
+  await prefs.initPrefs();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
 
