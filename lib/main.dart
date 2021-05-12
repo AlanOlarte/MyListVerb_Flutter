@@ -14,6 +14,7 @@ import 'package:list_verbs/src/provider/repeat_verb.dart';
 import 'package:list_verbs/src/pages/home_page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final prefs = new UserPreferences();
   await prefs.initPrefs();
   runApp(MyApp());

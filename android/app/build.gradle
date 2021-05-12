@@ -47,8 +47,8 @@ android {
         applicationId "com.alanolarte.myverblist"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 7
-        versionName "3.3"
+        versionCode 8
+        versionName "3.4"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
